@@ -13,13 +13,15 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js"
+    "test": "node node_modules/jest/bin/jest.js",
+    "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001'",
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
     "expo": "^25.0.0",
+    "prop-types": "^15.6.0",
     "react": "16.2.0",
     "react-native": "0.52.0"
   }

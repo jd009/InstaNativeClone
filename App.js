@@ -1,40 +1,51 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView,
+} from 'react-native';
 
 import { fetchInstaData } from './src/utils/instaDataFetcher';
+import Post from './src/components/post';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userInfo: '',
+      posts: [],
     }
   }
 
   componentDidMount() {
     fetchInstaData()
-      .then((users) => {
+      .then((data) => {
         this.setState({
-          userInfo: JSON.stringify(users),
+          posts: data.results,
         });
       });
   }
 
   render() {
+    const posts = this.state.posts.map((post, index) => {
+      return (
+        <Post
+          key={post.login.sha1}
+          username={post.login.username}
+        />
+      );
+    });
+
     return (
       <View style={styles.container}>
-        <Text>InstaNative</Text>
-        <Text
-          numberOfLines={15}
-          ellipsizeMode='tail'
-        >
-          {this.state.userInfo}
-        </Text>
-        <Image
-          source={{ uri: 'https://picsum.photos/300?random' }}
-          style={{height: 300, width: 300}}
-        />
+        <SafeAreaView>
+          <Text>InstaNative</Text>
+        </SafeAreaView>
+        <ScrollView>
+          {posts}
+        </ScrollView>
       </View>
     );
   }
@@ -45,6 +56,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });

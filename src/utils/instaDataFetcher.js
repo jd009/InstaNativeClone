@@ -1,4 +1,4 @@
-const DATA_API_URL = 'https://randomuser.me/api/?results=3&nat=US';
+const DATA_API_URL = 'https://randomuser.me/api/?results=5&nat=US';
 
 export function fetchInstaData() {
   return fetch(DATA_API_URL)
