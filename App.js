@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   SafeAreaView,
+  Platform,
 } from 'react-native';
 
 import { fetchInstaData } from './src/utils/instaDataFetcher';
@@ -42,7 +43,11 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <SafeAreaView>
-          <Text>InstaNative</Text>
+          <Text
+            style={styles.headerText}
+          >
+            {'InstaNative'}
+          </Text>
         </SafeAreaView>
         <ScrollView>
           {posts}
@@ -57,5 +62,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+  },
+  headerText: {
+    fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Roboto',
+    fontSize: 24,
   },
 });
