@@ -34,6 +34,7 @@ export default class App extends React.Component {
         <Post
           key={post.login.sha1}
           username={post.login.username}
+          userThumbnailURL={post.picture.thumbnail}
         />
       );
     });
