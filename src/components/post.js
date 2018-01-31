@@ -8,6 +8,8 @@ import {
   Platform,
 } from 'react-native';
 
+import PostActionBar from './postActionBar';
+
 function generateRandomImageURL() {
   const imageNumber = Math.floor(Math.random() * 1000);
   const imageURL = `https://picsum.photos/300?image=${imageNumber}`;
@@ -58,6 +60,7 @@ export default class Post extends Component {
           style={styles.postImage}
           onError={this.handleImageLoadError}
         />
+        <PostActionBar />
       </View>
     );
   }
