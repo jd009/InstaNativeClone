@@ -29,6 +29,18 @@ export default class App extends React.Component {
       });
   }
 
+  loadMorePosts = () => {
+    fetchInstaData()
+      .then((data) => {
+        this.setState({
+          posts: [
+            ...this.state.posts,
+            ...data.results,
+          ],
+        });
+      });
+  }
+
   renderPost({ item: post }) {
     return (
       <Post
@@ -57,6 +69,8 @@ export default class App extends React.Component {
           data={this.state.posts}
           keyExtractor={this.generateKeyForPost}
           renderItem={this.renderPost}
+          onEndReached={this.loadMorePosts}
+          onEndReachedThreshold={0.25}
         />
       </View>
     );
