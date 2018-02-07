@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
+  FlatList,
   SafeAreaView,
   Platform,
 } from 'react-native';
@@ -29,17 +29,21 @@ export default class App extends React.Component {
       });
   }
 
-  render() {
-    const posts = this.state.posts.map((post, index) => {
-      return (
-        <Post
-          key={post.login.sha1}
-          username={post.login.username}
-          userThumbnailURL={post.picture.thumbnail}
-        />
-      );
-    });
+  renderPost({ item: post }) {
+    return (
+      <Post
+        key={post.login.sha1}
+        username={post.login.username}
+        userThumbnailURL={post.picture.thumbnail}
+      />
+    );
+  }
 
+  generateKeyForPost(post) {
+    return post.login.sha1;
+  }
+
+  render() {
     return (
       <View style={styles.container}>
         <SafeAreaView>
@@ -49,9 +53,11 @@ export default class App extends React.Component {
             {'InstaNative'}
           </Text>
         </SafeAreaView>
-        <ScrollView>
-          {posts}
-        </ScrollView>
+        <FlatList
+          data={this.state.posts}
+          keyExtractor={this.generateKeyForPost}
+          renderItem={this.renderPost}
+        />
       </View>
     );
   }
